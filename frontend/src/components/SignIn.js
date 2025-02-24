@@ -21,20 +21,30 @@ const SignIn = () => {
       autoClose: 2000,
     });
 
-    // ✅ Delay navigation to Login after toast disappears
     setTimeout(() => {
       navigate("/login");
     }, 2000);
   };
 
   return (
-    <div>
+    <div
+      style={{
+        minHeight: "100vh",
+        backgroundColor: "#f8c6e7", // ✅ Light Magenta Background
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <Navbar /> {/* ✅ Show Navbar with Home button */}
       <ToastContainer position="top-right" autoClose={2000} />
-      <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
+      <div className="d-flex justify-content-center align-items-center flex-grow-1">
         <div
           className="card shadow-lg p-4 text-center"
-          style={{ width: "350px", borderRadius: "12px" }}
+          style={{
+            width: "350px",
+            borderRadius: "12px",
+            backgroundColor: "#f2f2f2", // ✅ Light Gray Card
+          }}
         >
           <h2 className="text-primary mb-3">Sign Up</h2>
           <form onSubmit={handleSignIn}>

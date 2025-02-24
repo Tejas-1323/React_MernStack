@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { useNavigate } from "react-router-dom"; // ✅ Import useNavigate for redirection
+// import { useNavigate } from "react-router-dom"; // ✅ Import useNavigate for redirection
 import axios from "axios";
 import StudentForm from "../components/StudentForm";
 import StudentTable from "../components/StudentTable";
@@ -12,7 +12,7 @@ import ReactPaginate from "react-paginate"; // ✅ Pagination support
 export const BASE_URL = "http://localhost:5000/api/students";
 
 const Home = () => {
-  const navigate = useNavigate(); // ✅ Hook for navigation
+  // const navigate = useNavigate(); // ✅ Hook for navigation
   const [students, setStudents] = useState([]);
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [student, setStudent] = useState({

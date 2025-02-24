@@ -6,7 +6,10 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <nav
+      className="navbar navbar-expand-lg shadow-sm"
+      style={{ backgroundColor: "#5a5a5a" }}
+    >
       <div className="container">
         {/* Brand Logo */}
         <a className="navbar-brand fw-bold text-light" href="/">

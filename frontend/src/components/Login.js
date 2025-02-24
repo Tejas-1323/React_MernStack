@@ -36,13 +36,24 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        minHeight: "100vh",
+        backgroundColor: "#f8c6e7", // ✅ Light Magenta Background (Same as Sign-In)
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       <Navbar /> {/* ✅ Show Navbar with Home button */}
       <ToastContainer position="top-right" autoClose={2000} />
-      <div className="d-flex justify-content-center align-items-center vh-100 bg-light">
+      <div className="d-flex justify-content-center align-items-center flex-grow-1">
         <div
           className="card shadow-lg p-4 text-center"
-          style={{ width: "350px", borderRadius: "12px" }}
+          style={{
+            width: "350px",
+            borderRadius: "12px",
+            backgroundColor: "#f2f2f2", // ✅ Light Gray Card (Same as Sign-In)
+          }}
         >
           <h2 className="text-success mb-3">Login</h2>
           <form onSubmit={handleLogin}>

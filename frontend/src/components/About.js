@@ -4,7 +4,14 @@ import Navbar from "./Navbar"; // ✅ Import Navbar Component
 
 const About = () => {
   return (
-    <div>
+    <div
+      style={{
+        minHeight: "100vh",
+        backgroundColor: "#e3f2fd", // ✅ Light Blue Background (Soothing & Professional)
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
       {/* ✅ Navbar at the Top */}
       <Navbar />
 
