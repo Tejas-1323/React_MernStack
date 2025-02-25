@@ -1,6 +1,8 @@
 import Student from "../models/studentModel.js";
 import User from "../models/User.js";
-
+import fs from "fs";
+import path from "path";
+import multer from "multer";
 // Get all students
 export const getStudents = async (req, res) => {
   try {
@@ -95,3 +97,88 @@ export const loginUser = async (req, res) => {
     return res.status(500).json({ message: "Server error" });
   }
 };
+
+
+
+export const fileData = async (req, res) => {
+  try {
+
+
+    const file = req.file;
+    const { data } = req.body;
+
+    if (!file) {
+      return res.status(400).json({ error: "No file uploaded" });
+    }
+
+    if (!data) {
+      return res
+        .status(400)
+        .json({ error: "Missing 'data' field in request." });
+    }
+
+    let parsedData;
+    try {
+      parsedData = JSON.parse(data);
+    } catch (error) {
+      return res
+        .status(400)
+        .json({ error: "Invalid JSON format in 'data' field" });
+    }
+
+    const { time, apiName } = parsedData;
+    if (!time && !apiName) {
+      return res
+        .status(400)
+        .json({ error: "At least 'time' or 'apiName' is required." });
+    }
+
+    // ✅ Read file content
+    const filePath = path.resolve(file.path);
+    const fileContent = fs.readFileSync(filePath, "utf8");
+
+    // ✅ Filter logs
+    const matchingLogs = fileContent
+      .split("\n")
+      .filter(
+        (line) =>
+          (time && line.includes(time)) || (apiName && line.includes(apiName))
+      );
+
+    // ✅ Delete file after processing
+    fs.unlinkSync(filePath);
+
+    // ✅ Convert logs into structured JSON format
+    const formattedLogs = matchingLogs.map((log) => formatLog(log));
+
+    if (formattedLogs.length === 0) {
+      return res.json({ message: "No matching logs found." });
+    }
+
+    return res.json({ logs: formattedLogs });
+  } catch (error) {
+    console.error("Error processing logs:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+/**
+ * Function to format log data properly
+ */
+function formatLog(log) {
+  try {
+    // If the log is already in JSON format, parse it
+    return JSON.parse(log);
+  } catch (error) {
+    // If log is in plain text, convert to structured object
+    const logParts = log.split(" "); // Assuming space-separated log parts
+    return {
+      timestamp: logParts[0] || "N/A",
+      logLevel: logParts[1] || "N/A",
+      apiName: logParts[2] || "N/A",
+      message: logParts.slice(3).join(" ") || "N/A",
+    };
+  }
+}
+
+
