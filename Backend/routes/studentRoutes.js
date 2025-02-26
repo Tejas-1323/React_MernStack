@@ -14,7 +14,7 @@ import {
 const router = express.Router();
 
 router.get("/", getStudents);
-router.post("/", addStudent);
+router.post("/add", addStudent);
 router.put("/:id", updateStudent);
 router.delete("/:id", deleteStudent);
 router.post("/signup", registerUser);
