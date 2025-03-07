@@ -1,5 +1,13 @@
 import express from "express";
 import multer from "multer";
+import rateLimit from "express-rate-limit";
+
+
+// const loginLimiter = rateLimit({
+//   windowMs: 10 * 60 * 1000, // 10 minutes
+//   max: 5, // Limit each IP to 5 requests per 10 minutes
+//   message: "Too many login attempts. Please try again later.",
+// });
 
 import {
   getStudents,
@@ -13,7 +21,7 @@ import {
 
 const router = express.Router();
 
-router.get("/", getStudents);
+router.get("/",getStudents);
 router.post("/add", addStudent);
 router.put("/:id", updateStudent);
 router.delete("/:id", deleteStudent);
