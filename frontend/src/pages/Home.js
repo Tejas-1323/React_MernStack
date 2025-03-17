@@ -9,7 +9,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import ReactPaginate from "react-paginate"; // ✅ Pagination support
 
 export const BASE_URL = "http://localhost:5000/api/students";
-
 const Home = () => {
   const [students, setStudents] = useState([]);
   const [filteredStudents, setFilteredStudents] = useState([]);
